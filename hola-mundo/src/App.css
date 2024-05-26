@@ -2,7 +2,7 @@
     align-items: center;
     display: flex;
     font-size: 15px;
-    margin-top: 10px;
+    /*margin-top: 10px; no es lo idóneo porque si este componente se usa en otro lado tendrá un margin indeseable*/
     justify-content: space-between;
 }
 

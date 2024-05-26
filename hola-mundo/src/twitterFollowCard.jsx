@@ -4,6 +4,7 @@ import './App.css'
 //para que un componente sea reutilizable se tiene que pasarle parámetros
 export function TwitterFollowCard({username, name,isFollowing}){
     const imageSrc= `https://unavatar.io/twitter/${username}`; //crear constante y un template string
+    console.log({isFollowing});
     return (
         <article className="tw-follow-card">
             <header className="tw-follow-card-header">

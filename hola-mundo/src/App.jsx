@@ -5,11 +5,11 @@ import { TwitterFollowCard } from './twitterFollowCard'
 export function App(){
     //<> usar esto en vez de React.Fragment
     return (
-        <> 
-            <TwitterFollowCard username="imadorisempai" name="Junior Miguel Romero Maza"/>
-            <TwitterFollowCard username="pamelaanderson" name="Pamela Anderson" />
-            <TwitterFollowCard username="SergioRamos" name="Sergio Ramos"/>
-            <TwitterFollowCard username="KMbappe" name="Kylian Mbappé"/>
-        </>
+        <div className='App'> 
+            <TwitterFollowCard username="imadorisempai" name="Junior Miguel Romero Maza" isFollowing/>
+            <TwitterFollowCard username="pamelaanderson" name="Pamela Anderson" isFollowing/>
+            <TwitterFollowCard username="SergioRamos" name="Sergio Ramos" isFollowing={false}/>
+            <TwitterFollowCard username="KMbappe" name="Kylian Mbappé" isFollowing/>
+        </div>
     )
 }
