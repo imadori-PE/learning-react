@@ -28,25 +28,49 @@
 }
 
 .tw-follow-card-button{
-    margin-left: 16px;
-    border:0;
+    margin-left: 6px;
+    border: 1px solid #000;
     border-radius: 999px;
     padding: 6px 16px;
     font-weight: bold;
     cursor: pointer;
     transition: .3s ease background-color;
+    
 }
+.tw-follow-card-button:hover{
+    background-color: rgb(7, 81, 150);
+    opacity: .8;
+}
+
 
 .tw-follow-card-button.is-following{
-    border: 1px solid red;
+    border: 1px solid #bbb;
+    background:transparent;
+    color: #fff;
+    width:140px;
 }
 
+.tw-follow-card-stopfollow{
+    display: none;
+    
+}
 
-.tw-follow-card-button:hover{
-    background-color: #09f;
+.tw-follow-followingnotext{
+    display:block;
 }
 
 .tw-follow-card-button.is-following:hover{
-    background: red;
+    background: rgba(121, 16, 16, 0.212);
+    color: red;
+    border: 1px solid red;
 }
+
+.tw-follow-card-button.is-following:hover .tw-follow-card-stopfollow{
+    display: block;
+}
+
+.tw-follow-card-button.is-following:hover .tw-follow-followingnotext{
+    display: none;
+}
+
 
