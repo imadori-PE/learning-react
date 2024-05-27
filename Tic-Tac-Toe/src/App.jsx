@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import confetti from 'canvas-confetti';
 
 import { TURNS } from './constants.js';
@@ -48,6 +48,7 @@ function App() {
 
         setTurn(newTurn);
         setBoard(newBoard);
+
         //guardar aqui partida
         saveGameToStorage(
             {board: newBoard, turn: newTurn}
@@ -64,7 +65,14 @@ function App() {
 
     };
 
-
+    //el useEffect se ejecuta cada vez que se renderiza algo, tiene dos parametros  una función y un array de dependencias que 
+    //puede ser opcional; cuando se pasa una lista de dependencias la función sólo se ejecutará una sola vez
+    useEffect(()=>{
+        console.log('useEffect');
+        
+    },[ turn, board]); // ejecuta la función cada vez que cambia el valor de la dependencia que se pasa
+    //util para guardar en la base datos o hacer una petición a un servicio, para hacer un
+    
     return (
         <main className='board'>
             <h1> Tic Tac Toe</h1>
