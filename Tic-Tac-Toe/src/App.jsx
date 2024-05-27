@@ -1,22 +1,13 @@
-import { Square } from './square.jsx'
 import { useState } from 'react';
-import './App.css'
+import confetti from 'canvas-confetti';
 
-const TURNS = {
-    X: 'X',
-    O: 'O'
-};
+import { TURNS } from './constants.js';
+import { checkEndGame,checkWinner } from './logic/board.js';
+import { Square } from './components/square.jsx';
+import { WinnerModal } from './components/winnerModal.jsx';
 
-const WINNER_COMBOS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6]
-]
+import './App.css';
+
 
 function App() {
     //un estado es un valor que cada vez que cambie rendizará el componente
@@ -41,23 +32,21 @@ function App() {
     //revisar si hay un ganador
     const newWinner = checkWinner(newBoard);
     if (newWinner) {
+        confetti()
         setWinner(newWinner); //sincronía no bloquea el código que viene despues
-        console.log(winner);
+    }else if(checkEndGame(newBoard)){
+        setWinner(false);
     }
 
     };
 
-    const checkWinner = (boardToCheck) => {
-        //revisan todas las combinaciones ganadoras
-        for (const combo of WINNER_COMBOS) {
-            const [a, b, c] = combo;
-            if (boardToCheck[a] && boardToCheck[a] === boardToCheck[b] &&
-                boardToCheck[b] === boardToCheck[c]
-            )
-                return boardToCheck[a];
-        }
-        return null;
-    }
+    
+    //resetear los estados a valores originales
+    const resetGame = () => {
+        setBoard(Array(9).fill(null));
+        setTurn(TURNS.X);
+        setWinner(null);
+    };
 
     return (
         <main className='board'>
@@ -82,6 +71,10 @@ function App() {
                     {TURNS.O}
                 </Square>
             </section>
+                
+            <WinnerModal winner={winner} resetGame={resetGame}>
+
+            </WinnerModal>
 
         </main>
     )
