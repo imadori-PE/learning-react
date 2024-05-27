@@ -3,8 +3,8 @@ Los valores exportados pueden luego ser importados en otros programas utilizando
 sentencia import o importación dinámica. 
 Esta funcionalidad es fundamental para trabajar con módulos en JavaScript */
 export const TURNS = {
-    X: 'X',
-    O: 'O'
+    X: '❌',
+    O: '⚪'
 };
 
 export const WINNER_COMBOS = [
