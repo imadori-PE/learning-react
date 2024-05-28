@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import confetti from 'canvas-confetti';
 
 import { TURNS } from './constants.js';
