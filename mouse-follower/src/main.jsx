@@ -5,3 +5,4 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
 )
+//el React.StrictMode ejecuta efecto dos veces en modo desarrollo para depurar, en producción no se ve
