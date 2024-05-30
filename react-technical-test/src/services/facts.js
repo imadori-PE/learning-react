@@ -15,3 +15,21 @@ export async function getRandomFact () {
   return fact
 }
 
+//forma original de recorrer una API con fetch.
+//se puede crear a async function una función rápidamente dándole clic  a los ... en el nombre de la aplicacion
+export const getRandomFactTwo = () =>{
+  return fetch(CAT_ENDPOINT_RANDOM_FACT)
+        .then(res => res.json())
+        .then(data => {
+          const {fact} = data
+          return fact
+        })
+}
+
+//esto puede ser usado en vue, react, etc
+export const getRandomFactThree = async () =>{
+  const res = await fetch(CAT_ENDPOINT_RANDOM_FACT);
+  const data = await res.json();
+  const { fact } = data;
+  return fact;
+}

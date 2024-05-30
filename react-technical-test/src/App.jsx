@@ -1,25 +1,26 @@
 import { useState, useEffect } from 'react'
-import { useCatImage } from './hooks/getCatImage.js'
+import { GetCatImage } from './hooks/getCatImage.js'
 import { getRandomFact } from './services/facts.js'
 import './App.css'
 
 function App() {
   const [fact, setFact] = useState()
-  const [image, setImage] = useState()
+  const [imageURL, setImageURL]=useState()
+ // const [image, setImage] = useState()
 
   const getCatFact = () => {
-    getRandomFact().then((newFact) => {
-      console.log(newFact)
+    getRandomFact().then( newFact => {
       setFact(newFact)
     })
-  }
+  } 
 
-  useEffect(() => {
-    const newImage = useCatImage(fact)
-    setImage(newImage)
-  }, [fact])
 
   useEffect(getCatFact, [])
+
+  useEffect(() => {
+    GetCatImage({fact:fact})
+  }, [fact]) 
+
 
   return (
     <main>
@@ -27,10 +28,8 @@ function App() {
       <button onClick={getCatFact}>
         Get new Fact
       </button>
-      <p>
-        {fact}
-      </p>
-      <img src={image} alt={`Image extracted for ${fact}`} />
+        {fact && <p>{fact}</p>}
+      {<img src='' alt={`Image extracted for ${fact}`} />}
     </main>
   )
 
