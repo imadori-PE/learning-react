@@ -1,35 +1,24 @@
-import { useState, useEffect } from 'react'
-import { GetCatImage } from './hooks/getCatImage.js'
-import { getRandomFact } from './services/facts.js'
+import { useCatImage } from './hooks/useCatImage.js'
+import { useFact } from './hooks/useFact.js'
 import './App.css'
 
 function App() {
-  const [fact, setFact] = useState()
-  const [imageURL, setImageURL]=useState()
- // const [image, setImage] = useState()
+  const {fact , getCatFact}= useFact()
+  //{fact} es un parámetro nombrado
+  const {imageURL}=useCatImage({fact}) 
 
-  const getCatFact = () => {
-    getRandomFact().then( newFact => {
-      setFact(newFact)
-    })
-  } 
-
-
-  useEffect(getCatFact, [])
-
-  useEffect(() => {
-    GetCatImage({fact:fact})
-  }, [fact]) 
-
+  const getFact = async () => {
+    getCatFact()
+    } 
 
   return (
     <main>
       <h1>Cat&apos;s App</h1>
-      <button onClick={getCatFact}>
+      <button onClick={getFact}>
         Get new Fact
       </button>
         {fact && <p>{fact}</p>}
-      {<img src='' alt={`Image extracted for ${fact}`} />}
+      {imageURL && <img src={imageURL} alt={`Image extracted for ${fact}`} />}
     </main>
   )
 
