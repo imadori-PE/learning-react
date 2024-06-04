@@ -1,31 +1,44 @@
-import { useEffect, useState } from 'react'
-import { ListMovies } from './components/ListMovies.jsx'
+import { useState, useCallback } from 'react'
+import { Movies } from './components/ListMovies.jsx'
+import { useSearch } from './hooks/useSearch.js'
+import { useMovies } from './hooks/useMovies.js'
 import './App.css'
+import debounce from 'just-debounce-it'
 
 function App() {
-  const [hasSearch, setHasSearch] = useState(false)
-  const [searchFilm, setSearchFilm] = useState()
+  const [sort, setSort] = useState(false)
+  const { search, updateSearch, error } = useSearch()
+  const { movies, loading, getMovies } = useMovies({ search, sort })
 
-  useEffect(() =>{ 
-      if (hasSearch)
-        {
-          const newSearch=document.getElementsByName('query')[0].value
-          setSearchFilm(newSearch)
-        }
-   }, [hasSearch] )
+  const debouncedGetMovies = useCallback(
+    debounce(search => {
+      console.log('search', search)
+      getMovies({ search })
+    }, 300)
+    , [getMovies]
+  )
 
-  const handleOnSubmit = (event) =>{
+
+  const handleOnSubmit = (event) => {
     event.preventDefault()
-    setHasSearch(true)
+    //const value=inputRef.current.value - <input ref={inputRef} name="query" placeholder=""
+    //no controlado porque dependemos que siempre estén registrados los datos
+    //const fields = Object.fromEntries(new window.FormData(event.target)) //obtiene un objeto de todos los input 
+    //const { query } = fields
+    //updateSearch(query)
+    getMovies({ search })
+
+  }
+
+  const handleSort = () => {
+    setSort(!sort)
   }
 
   const handleChange = (event) => {
     const newSearch = event.target.value
-    console.log(newSearch)
-    setHasSearch(false)
-    //setSearchFilm(newSearch)
+    updateSearch(newSearch)
+    debouncedGetMovies(newSearch)
   }
-
 
   return (
     <div className='page'>
@@ -34,15 +47,22 @@ function App() {
           Buscador de películas
         </h1>
         <form className='form' onSubmit={handleOnSubmit}>
-          <input name="query" placeholder="Avengers, Star Wars, The Matrix..." onChange={handleChange} />
-          <input type="checkbox" />
+          <input style={{
+            border: '1px solid transparent',
+            borderColor: error ? 'red' : 'transparent'
+          }}
+            name='query' placeholder="Avengers, Star Wars, The Matrix..." onChange={handleChange} />
+          <input name='check' type="checkbox" onChange={handleSort} checked={sort} />
           <button type="submit">
             Buscar
           </button>
         </form>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </header>
       <main>
-        { hasSearch&&<ListMovies searchFilms={searchFilm}></ListMovies>}
+        {
+          loading ? <p>Cargando...</p> : <Movies movies={movies} />
+        }
       </main>
     </div>
   )

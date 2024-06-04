@@ -1,31 +1,23 @@
 /* eslint-disable react/prop-types */
-import results from '../mocks/with-results.json'
-import { filterFilms } from '../services/filterFilms.js'
-
- function ListOfMovies({ searchFilms }) {
-   // const {Search}=results
-    filterFilms(searchFilms).then( (Search) =>{
-         const films=Search
+ function ListOfMovies({ movies }) {
+ 
          return (
             <ul className='movies'>
                 {
-                    films.map(element => {
-                        console.log(element)
-                        const { imdbID, Title, Year, Poster } = element
+                    movies.map(element => {
+                       // console.log(element)
+                        const { id, title, year, poster } = element
                         return (
-                            <li key={imdbID}>
-                                <h3>{Title}</h3>
-                                <p>{Year}</p>
-                                <img src={Poster} alt={Title}></img>
+                            <li key={id}>
+                                <h3>{title}</h3>
+                                <p>{year}</p>
+                                <img src={poster} alt={title}></img>
                             </li>
                         )
                     })
                 }
             </ul>
         )
-        }
-    )
-    
 }
 
 
