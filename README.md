@@ -16,3 +16,11 @@ Initializing project in '.'
 √ Where to put your end-to-end tests? · tests
 √ Add a GitHub Actions workflow? (y/N) · false
 √ Install Playwright browsers (can be done manually via 'npx playwright install')? (Y/n) · true
+
+# Titulo 1
+## Titulo 2 
+
+```
+// esm (node / bundler)
+para colocar codigo
+```

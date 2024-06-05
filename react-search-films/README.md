@@ -23,3 +23,6 @@ Simple.css: A straightforward framework with basic styles.
 Tacit: Designed for simplicity and ease of use.
 Almond.css: A classless framework with a focus on accessibility.
 Bolt.css: A lightweight alternative to Bootstrap
+
+just-debounce-it install
+npm install just-debounce-it
